@@ -303,7 +303,7 @@ def check_d8(company: str, from_date: str, to_date: str) -> list[Violation]:
 def check_d9(company: str, from_date: str, to_date: str) -> list[Violation]:
 	"""191/391 mahsup tutarsızlığı — Kaydedilmiş mahsup sonrası bakiye kontrolü (basit)."""
 	out: list[Violation] = []
-	# Dönem içi Kaydedildi mahsup yoksa atla
+	# Dönem içi gönderilmiş (docstatus=1) mahsup yoksa atla
 	if not frappe.db.exists("DocType", "TR VAT Settlement"):
 		return out
 	return out

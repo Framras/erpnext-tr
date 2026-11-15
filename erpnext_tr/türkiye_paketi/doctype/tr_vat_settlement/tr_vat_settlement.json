@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_auto_repeat": 0,
  "autoname": "naming_series:",
  "creation": "2026-11-15 00:00:00",
  "doctype": "DocType",
@@ -13,6 +14,7 @@
   "fark_hesabi",
   "fark_tutari",
   "je_no",
+  "amended_from",
   "section_rows",
   "mahsup_satirlari"
  ],
@@ -49,9 +51,10 @@
    "in_list_view": 1
   },
   {
+   "description": "Taslak önizleme durumu. Gönderildi/İptal docstatus ile izlenir.",
    "fieldname": "durum",
    "fieldtype": "Select",
-   "label": "Durum",
+   "label": "Önizleme Durumu",
    "options": "Taslak\nHesaplandı\nKaydedildi",
    "read_only": 1,
    "default": "Taslak",
@@ -74,6 +77,16 @@
    "fieldtype": "Link",
    "label": "Yevmiye",
    "options": "Journal Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Düzeltme Kaynağı",
+   "no_copy": 1,
+   "options": "TR VAT Settlement",
+   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -88,14 +101,17 @@
    "options": "TR VAT Settlement Entry"
   }
  ],
+ "is_submittable": 1,
  "module": "Türkiye Paketi",
  "name": "TR VAT Settlement",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
- "modified": "2026-11-15 00:00:00",
+ "modified": "2026-11-15 20:15:00",
  "modified_by": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -105,9 +121,12 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -117,6 +136,7 @@
    "report": 1,
    "role": "Accounts Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
