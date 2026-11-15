@@ -53,3 +53,8 @@ jspm_packages/
 
 # Aider AI Chat
 .aider*
+
+# Yerel kurulum / test / tasarım notları (public repoda tutulmaz)
+FAZ1_TEST_SONUCU.md
+KURULUM_SONUCU.md
+erpnext_tr/docs/beyanname_ayrim_tablosu.md
