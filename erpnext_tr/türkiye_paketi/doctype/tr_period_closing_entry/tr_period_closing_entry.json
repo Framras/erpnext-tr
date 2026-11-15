@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-11-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "kaynak_hesap",
+  "hedef_hesap",
+  "tutar",
+  "kaynak_bakiye",
+  "je_no",
+  "tarih"
+ ],
+ "fields": [
+  {
+   "fieldname": "kaynak_hesap",
+   "fieldtype": "Link",
+   "label": "Kaynak Hesap",
+   "options": "Account",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "hedef_hesap",
+   "fieldtype": "Link",
+   "label": "Hedef Hesap",
+   "options": "Account",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "tutar",
+   "fieldtype": "Currency",
+   "label": "Tutar",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "kaynak_bakiye",
+   "fieldtype": "Currency",
+   "label": "Kaynak Bakiye"
+  },
+  {
+   "fieldname": "je_no",
+   "fieldtype": "Link",
+   "label": "Yevmiye",
+   "options": "Journal Entry",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tarih",
+   "fieldtype": "Date",
+   "label": "Tarih"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Türkiye Paketi",
+ "name": "TR Period Closing Entry",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

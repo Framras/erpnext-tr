@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-11-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "hesap",
+  "borc",
+  "alacak",
+  "aciklama"
+ ],
+ "fields": [
+  {
+   "fieldname": "hesap",
+   "fieldtype": "Link",
+   "label": "Hesap",
+   "options": "Account",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "borc",
+   "fieldtype": "Currency",
+   "label": "Borç",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "alacak",
+   "fieldtype": "Currency",
+   "label": "Alacak",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "aciklama",
+   "fieldtype": "Data",
+   "label": "Açıklama",
+   "in_list_view": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Türkiye Paketi",
+ "name": "TR VAT Settlement Entry",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

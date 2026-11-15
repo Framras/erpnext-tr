@@ -1,0 +1,1 @@
+frappe.ui.form.on('TR VAT Withholding Rate', {});

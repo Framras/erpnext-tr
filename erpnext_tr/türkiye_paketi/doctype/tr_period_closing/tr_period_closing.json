@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-11-15 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sirket",
+  "donem_tipi",
+  "column_break_1",
+  "donem_baslangic",
+  "donem_bitis",
+  "section_kip",
+  "kip",
+  "durum",
+  "column_break_2",
+  "donem_kari",
+  "vergi_karsiligi",
+  "section_rows",
+  "kapanis_yevmiyeleri"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Seri",
+   "options": "TR-PK-.YYYY.-.#####",
+   "default": "TR-PK-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sirket",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donem_tipi",
+   "fieldtype": "Select",
+   "label": "Dönem Tipi",
+   "options": "Çeyrek\nYıllık",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donem_baslangic",
+   "fieldtype": "Date",
+   "label": "Dönem Başlangıç",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donem_bitis",
+   "fieldtype": "Date",
+   "label": "Dönem Bitiş",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_kip",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "kip",
+   "fieldtype": "Select",
+   "label": "Kip",
+   "options": "Hesaplama\nKapanış",
+   "reqd": 1,
+   "default": "Hesaplama"
+  },
+  {
+   "fieldname": "durum",
+   "fieldtype": "Select",
+   "label": "Durum",
+   "options": "Taslak\nHesaplandı\nKapatıldı\nİptal Edildi",
+   "read_only": 1,
+   "default": "Taslak",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donem_kari",
+   "fieldtype": "Currency",
+   "label": "Dönem Kârı",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vergi_karsiligi",
+   "fieldtype": "Currency",
+   "label": "Vergi Karşılığı (691)"
+  },
+  {
+   "fieldname": "section_rows",
+   "fieldtype": "Section Break",
+   "label": "Kapanış Yevmiyeleri"
+  },
+  {
+   "fieldname": "kapanis_yevmiyeleri",
+   "fieldtype": "Table",
+   "label": "Kapanış Yevmiyeleri",
+   "options": "TR Period Closing Entry"
+  }
+ ],
+ "is_submittable": 0,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-11-15 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Türkiye Paketi",
+ "name": "TR Period Closing",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

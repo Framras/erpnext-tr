@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-11-15 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "sirket",
+  "yil",
+  "ay",
+  "durum",
+  "fark_hesabi",
+  "fark_tutari",
+  "je_no",
+  "section_rows",
+  "mahsup_satirlari"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Seri",
+   "options": "TR-KDV-.YYYY.-.#####",
+   "default": "TR-KDV-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sirket",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "yil",
+   "fieldtype": "Int",
+   "label": "Yıl",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ay",
+   "fieldtype": "Select",
+   "label": "Ay",
+   "options": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "durum",
+   "fieldtype": "Select",
+   "label": "Durum",
+   "options": "Taslak\nHesaplandı\nKaydedildi",
+   "read_only": 1,
+   "default": "Taslak",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "fark_hesabi",
+   "fieldtype": "Data",
+   "label": "Fark Hesabı",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fark_tutari",
+   "fieldtype": "Currency",
+   "label": "Fark Tutarı",
+   "read_only": 1
+  },
+  {
+   "fieldname": "je_no",
+   "fieldtype": "Link",
+   "label": "Yevmiye",
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_rows",
+   "fieldtype": "Section Break",
+   "label": "Mahsup Satırları"
+  },
+  {
+   "fieldname": "mahsup_satirlari",
+   "fieldtype": "Table",
+   "label": "Mahsup Satırları",
+   "options": "TR VAT Settlement Entry"
+  }
+ ],
+ "module": "Türkiye Paketi",
+ "name": "TR VAT Settlement",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "modified": "2026-11-15 00:00:00",
+ "modified_by": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
