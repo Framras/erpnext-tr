@@ -4,11 +4,10 @@ ERPNext v16 Türkiye muhasebe ve vergi paketi (kapanış, KDV, tevkifat, beyanna
 
 ### Installation
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+You can install this app using the [bench](https://github.com/frappe/bench) CLI (run from your bench directory):
 
 ```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
+bench get-app https://github.com/Framras/erpnext-tr.git --branch develop
 bench install-app erpnext_tr
 ```
 
