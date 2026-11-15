@@ -13,19 +13,12 @@ bench install-app erpnext_tr
 
 ### Contributing
 
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+This app uses `pre-commit` for basic syntax and safety checks (merge conflicts, AST, JSON/YAML/TOML, debug statements, trailing whitespace). Formatting and linting (ruff, eslint, prettier) come from the Frappe/ERPNext bench environment—do not duplicate them here. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
 
 ```bash
 cd apps/erpnext_tr
 pre-commit install
 ```
-
-Pre-commit is configured to use the following tools for checking and formatting your code:
-
-- ruff
-- eslint
-- prettier
-- pyupgrade
 
 ### License
 
