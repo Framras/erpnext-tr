@@ -1,0 +1,98 @@
+{#- Print Format: Cari Hesap Mutabakat Mektubu (Customer / Supplier)
+    Optional URL params: company, report_date.  __API__ is replaced by install_print_formats.py -#}
+{%- set company = frappe.form_dict.get("company") or frappe.defaults.get_user_default("Company") -%}
+{%- set d = frappe.call("__API__.get_mutabakat_data", company=company, party_type=doc.doctype, party=doc.name, report_date=frappe.form_dict.get("report_date")) -%}
+{%- set ccy = d.company_currency -%}
+{%- macro money(v) -%}{{ frappe.utils.fmt_money(v | abs, currency=ccy) }}{%- endmacro -%}
+{%- set net = d.net_outstanding or 0 -%}
+
+<style>
+	.mut { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000; line-height: 1.5; }
+	.mut h2 { text-align: center; margin: 8px 0 18px; letter-spacing: 1px; }
+	.mut table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+	.mut th, .mut td { border: 1px solid #444; padding: 5px 8px; }
+	.mut th { background: #eee; text-align: left; }
+	.mut td.n, .mut th.n { text-align: right; white-space: nowrap; }
+	.mut .box { display: inline-block; width: 13px; height: 13px; border: 1px solid #000; vertical-align: middle; margin-right: 6px; }
+	.mut .sign td { border: 1px solid #444; height: 90px; vertical-align: top; width: 50%; }
+	.mut .small { font-size: 10px; color: #333; }
+</style>
+
+<div class="mut">
+	<table style="border:none">
+		<tr>
+			<td style="border:none"><b>{{ d.company_name }}</b><br>{% if d.company_tax_id %}VKN: {{ d.company_tax_id }}{% endif %}</td>
+			<td style="border:none; text-align:right">Tarih: {{ frappe.utils.formatdate(frappe.utils.today()) }}<br>Mutabakat Tarihi: <b>{{ frappe.utils.formatdate(d.report_date) }}</b></td>
+		</tr>
+	</table>
+
+	<h2>CARİ HESAP MUTABAKAT MEKTUBU</h2>
+
+	<p><b>Sayın {{ d.party_name }}</b>{% if d.party_tax_id %} (VKN/TCKN: {{ d.party_tax_id }}){% endif %}</p>
+
+	<p>
+		Şirketimiz kayıtlarına göre <b>{{ frappe.utils.formatdate(d.report_date) }}</b> tarihi itibarıyla cari hesap bakiyeniz aşağıda belirtilmiştir.
+		{% if d.linked_counterparts %}Hesabınız, aynı firmaya ait <i>{{ d.linked_counterparts | join(", ") }}</i> kaydı ile bağlantılı olup alacak ve borç bakiyeleri netleştirilerek gösterilmiştir.{% endif %}
+	</p>
+
+	<table>
+		<tr><th>Hesap / Açıklama</th><th class="n">Tutar ({{ ccy }})</th></tr>
+		<tr><td>120 Alıcılar – Şirketimizin alacağı</td><td class="n">{{ money(d.rec_outstanding) }}</td></tr>
+		{% if d.linked or d.pay_outstanding %}
+		<tr><td>320 Satıcılar – Şirketimizin borcu</td><td class="n">{{ money(d.pay_outstanding) }}</td></tr>
+		{% endif %}
+		<tr>
+			<th>
+				{% if net > 0 %}NET BAKİYE – Firmanızın borcu (Şirketimiz alacaklı)
+				{% elif net < 0 %}NET BAKİYE – Şirketimizin borcu (Firmanız alacaklı)
+				{% else %}NET BAKİYE – Bakiye bulunmamaktadır{% endif %}
+			</th>
+			<th class="n">{{ money(net) }}</th>
+		</tr>
+	</table>
+
+	{% if d.fx_detail or d.kdv_total %}
+	<table>
+		<tr><th colspan="2">Bakiye Ayrıntısı</th></tr>
+		<tr><td>TL cinsinden belgeler</td><td class="n">{{ frappe.utils.fmt_money(d.try_native or 0, currency=ccy) }}</td></tr>
+		{% if d.fx_detail %}
+		<tr><td>Döviz cinsinden belgeler (TL karşılığı)</td><td class="n">{{ frappe.utils.fmt_money(d.fx_try or 0, currency=ccy) }}</td></tr>
+		<tr><td>Döviz bakiyeleri (orijinal para birimi)</td><td class="n">{{ d.fx_detail }}</td></tr>
+		{% endif %}
+		{% if d.kdv_total %}
+		<tr><td>Bakiye içindeki KDV toplamı</td><td class="n">{{ frappe.utils.fmt_money(d.kdv_total, currency=ccy) }}</td></tr>
+		<tr><td>KDV hariç bakiye</td><td class="n">{{ frappe.utils.fmt_money(d.net_excl_kdv or 0, currency=ccy) }}</td></tr>
+		{% endif %}
+	</table>
+	{% endif %}
+
+	{% if d.cheque_total %}
+	<table>
+		<tr><th colspan="2">Çek / Senet Bakiyeleri (portföy ve verilen)</th></tr>
+		<tr><td>101 Alınan Çekler</td><td class="n">{{ frappe.utils.fmt_money(d.bal_101 or 0, currency=ccy) }}</td></tr>
+		<tr><td>103 Verilen Çekler ve Ödeme Emirleri (-)</td><td class="n">{{ frappe.utils.fmt_money(d.bal_103 or 0, currency=ccy) }}</td></tr>
+		<tr><td>121 Alacak Senetleri</td><td class="n">{{ frappe.utils.fmt_money(d.bal_121 or 0, currency=ccy) }}</td></tr>
+		<tr><td>321 Borç Senetleri</td><td class="n">{{ frappe.utils.fmt_money(d.bal_321 or 0, currency=ccy) }}</td></tr>
+		<tr><th>Çek/Senet dahil toplam risk</th><th class="n">{{ frappe.utils.fmt_money(d.exposure or 0, currency=ccy) }}</th></tr>
+	</table>
+	{% endif %}
+
+	<p>
+		Yukarıda belirtilen bakiyenin kayıtlarınızla uyumlu olup olmadığını, aşağıdaki cevap formunu doldurarak <b>7 gün içinde</b> bildirmenizi rica ederiz.
+		Belirtilen süre içinde cevap alınmaması halinde bakiyenin mutabık olduğu kabul edilecektir.
+	</p>
+
+	<p style="margin-top:14px"><b>CEVAP FORMU</b></p>
+	<p><span class="box"></span> Yukarıdaki bakiye kayıtlarımızla <b>mutabıktır</b>.</p>
+	<p><span class="box"></span> Yukarıdaki bakiye kayıtlarımızla <b>mutabık değildir</b>. Bakiyemiz: ______________ {{ ccy }}
+	&nbsp; (<span class="box"></span> Borçluyuz &nbsp; <span class="box"></span> Alacaklıyız)<br>
+	Fark nedeni / açıklama: ________________________________________________________________</p>
+
+	<table class="sign">
+		<tr>
+			<td><b>Mektubu Gönderen</b><br>{{ d.company_name }}<br><span class="small">Kaşe / İmza / Tarih</span></td>
+			<td><b>Cevap Veren</b><br>{{ d.party_name }}<br><span class="small">Kaşe / İmza / Tarih</span></td>
+		</tr>
+	</table>
+	<p class="small">Bu mektup mutabakat amaçlıdır; bir ödeme talebi veya ibraname niteliği taşımaz.</p>
+</div>
