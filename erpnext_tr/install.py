@@ -12,6 +12,7 @@ def after_install() -> None:
 
 def after_migrate() -> None:
 	"""Migrate sonrası alanlar / zincirler / şablonlar (idempotent)."""
+	from erpnext_tr.party_link_ar_ap import setup_print_formats as setup_party_link_print_formats
 	from erpnext_tr.setup import (
 		load_tax_offices_from_csv,
 		setup_closing_chains,
@@ -27,3 +28,4 @@ def after_migrate() -> None:
 	setup_closing_chains()
 	setup_kdv_templates()
 	setup_vuk_report_templates()
+	setup_party_link_print_formats()
